@@ -1,12 +1,14 @@
-{ lib, stdenv, gnumake, python311, python311Packages, build10g ? false }:
+{ lib, stdenv, gnumake, python, verilog, cocotb-test, cocotbext-eth, cocotbext-axi, build10g ? false }:
 
 let 
-  thisPython = python311.withPackages (ps: [ ps.cocotb ]);
+  thisPython = python.withPackages (ps: 
+    [ ps.cocotb ps.scapy ps.cocotb-bus ps.pytest cocotb-test cocotbext-eth cocotbext-axi ]
+  );
 in
   stdenv.mkDerivation rec {
     name = "adm_pcie_9v3";
 
-    buildInputs = [ gnumake thisPython ];
+    buildInputs = [ gnumake thisPython verilog ];
 
     src = lib.cleanSource ../.;
 
