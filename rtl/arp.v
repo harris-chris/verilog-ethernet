@@ -432,16 +432,17 @@ always @(posedge clk) begin
         if (send_arp_response_counter == 100_000) begin
             $display("Counter is target");
             // send reply frame to valid incoming request
-            outgoing_frame_valid_next = 1'b1;
+            outgoing_frame_valid_reg = 1'b1;
             outgoing_eth_dest_mac_next = send_arp_mac_address;
             outgoing_arp_oper_next = ARP_OPER_ARP_REPLY;
             outgoing_arp_tha_next = send_arp_sha;
             outgoing_arp_tpa_next = send_arp_sha;
             send_arp_response_counter = 0;
         end
-        send_arp_response_counter <= send_arp_response_counter + 1;
+        else begin 
+            outgoing_frame_valid_reg <= outgoing_frame_valid_next;
+        end
 
-        outgoing_frame_valid_reg <= outgoing_frame_valid_next;
         cache_query_request_valid_reg <= cache_query_request_valid_next;
         cache_write_request_valid_reg <= cache_write_request_valid_next;
         arp_request_ready_reg <= arp_request_ready_next;
@@ -449,6 +450,8 @@ always @(posedge clk) begin
         arp_request_retry_cnt_reg <= arp_request_retry_cnt_next;
         arp_request_timer_reg <= arp_request_timer_next;
         arp_response_valid_reg <= arp_response_valid_next;
+
+        send_arp_response_counter <= send_arp_response_counter + 1;
     end
 
     cache_query_request_ip_reg <= cache_query_request_ip_next;

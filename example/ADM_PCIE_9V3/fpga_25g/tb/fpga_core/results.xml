@@ -1,7 +1,7 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1727745384" />
-    <testcase name="dut_intermittently_sends_arp_responses" classname="test_fpga_core" file="/home/chris/per/verilog-ethernet/example/ADM_PCIE_9V3/fpga_25g/tb/fpga_core/test_fpga_core.py" lineno="97" time="107.41314363479614" sim_time_ns="512092.161" ratio_time="4767.499988093724" />
-    <testcase name="run_test" classname="test_fpga_core" file="/home/chris/per/verilog-ethernet/example/ADM_PCIE_9V3/fpga_25g/tb/fpga_core/test_fpga_core.py" lineno="127" time="0.4683248996734619" sim_time_ns="1758.7209999999614" ratio_time="3755.3437821184057" />
+    <property name="random_seed" value="1727746563" />
+    <testcase name="dut_intermittently_sends_arp_responses" classname="test_fpga_core" file="/home/chris/per/verilog-ethernet/example/ADM_PCIE_9V3/fpga_25g/tb/fpga_core/test_fpga_core.py" lineno="97" time="106.35524249076843" sim_time_ns="512092.161" ratio_time="4814.921662601158" />
+    <testcase name="run_test" classname="test_fpga_core" file="/home/chris/per/verilog-ethernet/example/ADM_PCIE_9V3/fpga_25g/tb/fpga_core/test_fpga_core.py" lineno="127" time="0.47479844093322754" sim_time_ns="1758.7209999999614" ratio_time="3704.1423230943087" />
   </testsuite>
 </testsuites>
