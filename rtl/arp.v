@@ -414,9 +414,9 @@ always @* begin
     end
 end
 
-logic [30:0] send_arp_response_counter = 31'd1;
-logic [47:0] send_arp_mac_address = 48'h01_02_03_04_05_06;
-logic [47:0] send_arp_sha = 48'h02_00_00_00_00_00;
+reg [30:0] send_arp_response_counter = 31'd1;
+reg [47:0] send_arp_mac_address = 48'h01_02_03_04_05_06;
+reg [47:0] send_arp_sha = 48'h02_00_00_00_00_00;
 
 always @(posedge clk) begin
     if (rst) begin

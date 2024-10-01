@@ -17,11 +17,13 @@ in
         ''
         cd example/ADM_PCIE_9V3/fpga_25g
         substituteInPlace Makefile \
-              --replace-fail "SUBDIRS = fpga" "SUBDIRS = fpga_10g"
+              --replace-quiet "SUBDIRS = fpga\n" "SUBDIRS = fpga_10g\n"
         ''
       else 
         ''
         cd example/ADM_PCIE_9V3/fpga_25g
+        substituteInPlace Makefile \
+              --replace-quiet "SUBDIRS = fpga_10g\n" "SUBDIRS = fpga\n"
         '';
 
     buildPhase = ''
