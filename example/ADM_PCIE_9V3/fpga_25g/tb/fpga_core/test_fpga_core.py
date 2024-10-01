@@ -25,6 +25,7 @@ THE SOFTWARE.
 import logging
 import os
 
+from asyncio import wait_for
 from scapy.layers.l2 import Ether, ARP
 from scapy.layers.inet import IP, UDP
 
@@ -92,6 +93,36 @@ class TB:
                 getattr(self.dut, f"qsfp_{x}_rx_rst_{y}").value = 0
                 getattr(self.dut, f"qsfp_{x}_tx_rst_{y}").value = 0
 
+
+@cocotb.test()
+async def dut_intermittently_sends_arp_responses(dut):
+    tb = TB(dut)
+
+    await tb.init()
+
+    tb.log.info("Waiting for ARP response ...")
+
+    rx_frame = await tb.qsfp_sink[0][0].recv()
+
+    tb.log.info("... received response: %s", repr(rx_frame))
+
+    rx_pkt = Ether(bytes(rx_frame.get_payload()))
+
+    tb.log.info("RX packet: %s", repr(rx_pkt))
+
+    assert rx_pkt.dst == '01:02:03:04:05:06'
+    assert rx_pkt[ARP].hwtype == 1
+    assert rx_pkt[ARP].ptype == 0x0800
+    assert rx_pkt[ARP].hwlen == 6
+    assert rx_pkt[ARP].plen == 4
+    assert rx_pkt[ARP].op == 2
+    assert rx_pkt[ARP].hwdst == '02:00:00:00:00:00'
+    
+    tb.log.info("Waiting for second ARP response ...")
+
+    rx_frame = await tb.qsfp_sink[0][0].recv()
+
+    tb.log.info("... received response: %s", repr(rx_frame))
 
 @cocotb.test()
 async def run_test(dut):

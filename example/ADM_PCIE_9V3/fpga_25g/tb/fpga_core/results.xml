@@ -1,6 +1,7 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1727664531" />
-    <testcase name="run_test" classname="test_fpga_core" file="/home/chris/per/verilog-ethernet/example/ADM_PCIE_9V3/fpga_25g/tb/fpga_core/test_fpga_core.py" lineno="96" time="3.7504870891571045" sim_time_ns="1756.161" ratio_time="468.24877895918445" />
+    <property name="random_seed" value="1727744418" />
+    <testcase name="dut_intermittently_sends_arp_responses" classname="test_fpga_core" file="/home/chris/per/verilog-ethernet/example/ADM_PCIE_9V3/fpga_25g/tb/fpga_core/test_fpga_core.py" lineno="97" time="9.463421106338501" sim_time_ns="25692.161" ratio_time="2714.8914447854017" />
+    <testcase name="run_test" classname="test_fpga_core" file="/home/chris/per/verilog-ethernet/example/ADM_PCIE_9V3/fpga_25g/tb/fpga_core/test_fpga_core.py" lineno="127" time="0.49680042266845703" sim_time_ns="1758.7210000000014" ratio_time="3540.0956193905963" />
   </testsuite>
 </testsuites>
