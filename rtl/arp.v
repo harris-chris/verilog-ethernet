@@ -414,10 +414,6 @@ always @* begin
     end
 end
 
-reg [30:0] send_arp_response_counter = 31'd1;
-reg [47:0] send_arp_mac_address = 48'h01_02_03_04_05_06;
-reg [47:0] send_arp_sha = 48'h02_00_00_00_00_00;
-
 always @(posedge clk) begin
     if (rst) begin
         outgoing_frame_valid_reg <= 1'b0;
@@ -429,20 +425,7 @@ always @(posedge clk) begin
         arp_request_timer_reg <= 36'd0;
         arp_response_valid_reg <= 1'b0;
     end else begin
-        if (send_arp_response_counter == 100_000) begin
-            $display("Counter is target");
-            // send reply frame to valid incoming request
-            outgoing_frame_valid_reg = 1'b1;
-            outgoing_eth_dest_mac_next = send_arp_mac_address;
-            outgoing_arp_oper_next = ARP_OPER_ARP_REPLY;
-            outgoing_arp_tha_next = send_arp_sha;
-            outgoing_arp_tpa_next = send_arp_sha;
-            send_arp_response_counter = 0;
-        end
-        else begin 
-            outgoing_frame_valid_reg <= outgoing_frame_valid_next;
-        end
-
+        outgoing_frame_valid_reg <= outgoing_frame_valid_next;
         cache_query_request_valid_reg <= cache_query_request_valid_next;
         cache_write_request_valid_reg <= cache_write_request_valid_next;
         arp_request_ready_reg <= arp_request_ready_next;
@@ -450,8 +433,6 @@ always @(posedge clk) begin
         arp_request_retry_cnt_reg <= arp_request_retry_cnt_next;
         arp_request_timer_reg <= arp_request_timer_next;
         arp_response_valid_reg <= arp_response_valid_next;
-
-        send_arp_response_counter <= send_arp_response_counter + 1;
     end
 
     cache_query_request_ip_reg <= cache_query_request_ip_next;
